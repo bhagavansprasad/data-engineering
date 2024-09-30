@@ -13,7 +13,6 @@ def summarize_pdf_document():
     Make sure each activity can be implimented idipedentely
     Integration can be done at later stage
     Can you also title the project with appropriate name
-    Along with, can you generate PlantUML diagram for each activity?
     """
     
     model = "gemini-1.5-pro-001"
