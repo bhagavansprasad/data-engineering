@@ -18,21 +18,18 @@ def accessfiles(filename):
     rfd.close()  
     return rows  
 
-# TODO
-# What if the file is already downloaded? -- Don't Download
-# What if file exists and content is different? -- Download
-# separate download logic to different file
-# Rename sample.py to data_eng.py
-# data_eng_crawller.py 
 
-def download_files(url,index):
+
+
+def download_files(url):
     response = requests.get(url)
    # print(response)
     if response.status_code == 200:
-        folder_name = "downloding_file"
+        folder_name = "downloded_file"
         os.makedirs(folder_name,exist_ok=True)
         print(f"folder{folder_name} is created")
-        file_name = f"example {index}.pdf"
+        url_part = url.split("/")[-1].split("?")[0]
+        file_name = f"{url_part}.pdf"
         file_path = os.path.join(folder_name, file_name)
         with open(file_path, "wb") as file:  
             file.write(response.content)  
@@ -40,13 +37,19 @@ def download_files(url,index):
     else:
         print(f"Failed to download from {url}, status code: {response.status_code}")
 
+
+
+
 def main():
     filename = "links.csv"
     rows = accessfiles(filename)
-    for index, row in enumerate(rows[1:], start=1): 
+    for row in rows[1:]: 
         url = row[1].strip()  
+        print(row[1])
         if url:  
-            download_files(url,index) 
+            download_files(url) 
+
+
 
 if __name__ == "__main__":
     main()
