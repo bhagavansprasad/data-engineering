@@ -17,6 +17,8 @@ def accessfiles(filename):
         rows.append(row)  
     rfd.close()  
     return rows  
+   
+
 
 
 
