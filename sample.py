@@ -19,10 +19,6 @@ def accessfiles(filename):
     return rows  
    
 
-
-
-
-
 def download_files(url):
     response = requests.get(url)
    # print(response)
@@ -55,4 +51,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
