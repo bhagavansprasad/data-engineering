@@ -1,0 +1,26 @@
+@startuml
+a -> b
+b -> c: data
+c -> b: process
+b -> a: reply
+a -> d: Output
+a -> a
+@enduml
+
+@startuml
+control Pdf2Emb
+participant GetDocs
+participant PDFReader
+participant Model
+database ChromaDB
+
+Pdf2Emb -> GetDocs: Get List of PDFs 
+GetDocs -> Pdf2Emb: PDFs List
+Pdf2Emb -> Pdf2Emb: Go through the each PDF
+Pdf2Emb -> PDFReader: Read Text from PDF
+PDFReader -> Pdf2Emb: Text
+Pdf2Emb -> Model: Text
+Model -> ChromaDB: Embeddings
+ChromaDB ->Pdf2Emb: Success
+Pdf2Emb -> Pdf2Emb: Goto next file
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+control "Task(Embeddings)" as U
+collections "pdfs" as pdfs
+participant "PDF Reader" as PDFR
+participant "LLM" as Model
+participant "Chromadb" as VDB
+
+U -> pdfs : Provide list of PDF files
+pdfs -> PDFR: Open and read each PDF
+PDFR -> U: Extracted text content
+
+U -> Model: Send extracted text for embedding
+Model -> Model: Generate embeddings
+Model -> U: Return embeddings
+
+U -> VDB: Store embeddings with metadata
+VDB -> U: Confirm storage success
+
+U -> U: Repeat for each PDF
+@enduml
